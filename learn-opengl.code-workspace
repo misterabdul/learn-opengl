@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		"C_Cpp.default.includePath": [
-			"./glad"
+			"./libs"
 		]
 	}
 }

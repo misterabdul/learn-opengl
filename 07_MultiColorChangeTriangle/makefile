@@ -2,23 +2,24 @@ SRCDIR := src
 SHDDIR := shd
 OBJDIR := obj
 BINDIR := bin
-GLAD_DIR := ../glad
+LIBDIR := ../libs
+
 PKGCNF := $(shell pkg-config --libs --cflags glu glfw3) -ldl -lm
-CFLAGS := -I$(GLAD_DIR) -Wall -Wextra -g
+CFLAGS := -I$(LIBDIR) -Wall -Wextra -g
 
 SRCS := $(shell find $(SRCDIR) -name *.c)
 OBJS := $(subst $(SRCDIR)/,,$(SRCS:%=$(OBJDIR)/%.o))
+LIBS := $(shell find $(LIBDIR) -name "*.o")
 VERTS := $(subst $(SHDDIR)/,$(BINDIR)/,$(shell find $(SHDDIR) -name *.vert))
 FRAGS := $(subst $(SHDDIR)/,$(BINDIR)/,$(shell find $(SHDDIR) -name *.frag))
 
-GLAD_OBJ := $(GLAD_DIR)/glad.o
 
 .all: main
 
 main: $(BINDIR)/main $(VERTS) $(FRAGS)
 
-$(BINDIR)/main: $(OBJS) $(GLAD_OBJ)
-	$(CC) $(OBJS) $(GLAD_OBJ) -o $@ $(PKGCNF) $(CFLAGS)
+$(BINDIR)/main: $(OBJS) $(LIBS)
+	$(CC) $(OBJS) $(LIBS) -o $@ $(PKGCNF) $(CFLAGS)
 
 $(OBJDIR)/%.c.o: $(SRCDIR)/%.c
 	$(CC) -c $< -o $@ $(PKGCNF) $(CFLAGS)

@@ -102,17 +102,26 @@ Shader_setBool(const Shader shader, const char* name, int value)
   glUniform1i(glGetUniformLocation(shader->id, name), value);
 }
 
+void
 Shader_setInt(const Shader shader, const char* name, int value)
 {
   glUniform1i(glGetUniformLocation(shader->id, name), value);
 }
 
+void
 Shader_setFloat(const Shader shader, const char* name, float value)
 {
   glUniform1f(glGetUniformLocation(shader->id, name), value);
 }
 
+void
 Shader_set3Float(const Shader shader, const char* name, float x, float y, float z)
 {
   glUniform3f(glGetUniformLocation(shader->id, name), x, y, z);
+}
+
+void
+Shader_setMat4(const Shader shader, const char* name, float* value)
+{
+  glUniformMatrix4fv(glGetUniformLocation(shader->id, name), 1, GL_FALSE, value);
 }

@@ -21,4 +21,6 @@ void Shader_setFloat(const Shader shader, const char* name, float value);
 
 void Shader_set3Float(const Shader shader, const char* name, float x, float y, float z);
 
+void Shader_setMat4(const Shader shader, const char* name, float* value);
+
 #endif
